@@ -1,0 +1,116 @@
+<html lang-"en">
+<head>
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+
+    <link rel="stylesheet" href="static/css/gather.css">
+</head>
+<body>
+
+    {% raw %}
+    <div ng-app="GatheringsApp">
+
+        <!-- Homepage template -->
+        <script type="text/ng-template" id="homepage.html">
+          <div id="homepage" ng-init="reset()">
+            <div class="sideBar">
+              <div class="sideBarIcon">
+                <h1>GATHER</h1>
+              </div>
+              <hr>
+              <h3>Decks in Play</h3>
+
+              <div class="sideBarDeck">
+                <div class="sideBarImage">
+                  <img src="static/img/schemeBack.jpg">
+                </div>
+                <div class="sideBarFunction">
+                  <h4>Archenemy</h4>
+                  <button class="button buttonSolid" type="button" ng-click="schemeDraw()">DRAW</button>
+                  <p>Cards left: {{schemeDeck.length}}</p>
+                </div>
+
+              </div>
+
+              <div class="sideBarDeck">
+                <div class="sideBarImage">
+                  <img src="static/img/planechaseBack.jpg">
+                </div>
+                <div class="sideBarFunction">
+                  <h4>Planeschase</h4>
+                  <button class="button buttonSolid" ng-click="planeDraw()">DRAW</button>
+                  <p>Cards left: {{planeDeck.length}}</p>
+                </div>
+              </div>
+
+              <hr>
+              <!--<button class="button buttonClear">VIEW ALL</button>-->
+              <div class="sideBarRestart">
+                <button class="button buttonRestart" ng-click="reset()">RESTART GAME</button>
+              </div>
+            </div>  
+
+          <div class="playArea">
+            <div class="schemeArea">
+              <scheme-card-view card="schemeDrawn[schemeDrawn.length - 1]" size="normal"></scheme-card-view>
+            </div>
+            <div class="planeArea">
+              <plane-card-view card="planeDrawn[planeDrawn.length - 1]" size="normal"></plane-card-view>
+            </div>
+            
+            
+
+          </div>
+        </div>
+
+        </script>
+              
+        <!-- Scheme Card template-->
+        <script type="text/ng-template" id="schemecard.html">
+          <div ng-if="!!card">
+            <div class="playAreaCard">
+              <div class="activeCard">
+                <img ng-src="{{card.image_uris[size]}}"/>
+              </div>
+              <div class="cardOverlay">
+                <h4>{{card.name}}</h4>
+                <p>{{card.oracle_text}}</p>
+              </div>
+            </div>
+              
+          </div>
+        </script>
+
+        <!-- Plane Card template-->
+        <script type="text/ng-template" id="planecard.html">
+          <div ng-if="!!card">
+            <div class="playAreaCard">
+              <div class="activeCard">
+                <img ng-src="{{card.image_uris[size]}}" ng-style="{transform: rotate(90deg)}"/>
+              </div>
+              <div class="cardOverlay">
+                <h4 class="planesText">{{card.name}}</h4>
+                <p class="planesText">{{card.oracle_text}}</p>
+              </div>
+            </div>
+              
+          </div>
+        </script>
+
+        <ng-view></ng-view>
+    {% endraw %}
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.js"
+      integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
+    <script type="text/javascript" src="static/js/app.js"></script>
+
+</body>
+
+</html>
